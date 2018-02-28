@@ -1,8 +1,9 @@
-package relaxbot
+package relaxbot.services
 
 import cats.data._
 import cats.implicits._
 import com.github.nscala_time.time.Imports.DateTime
+import relaxbot.models.{Percentage, RelaxEvent, TimeSpent}
 
 object MessageValidator {
   sealed trait ValidationError {
@@ -20,11 +21,6 @@ object MessageValidator {
 
   type ValidationResult[A] = ValidatedNel[ValidationError, A]
 
-  final case class Percentage(value: Double) {
-    override def toString: String = {
-      s"${value}%"
-    }
-  }
   private def validatePercentage(value: Int): ValidationResult[Percentage] = {
     if(value >= 0 && value <= 100) {
       Percentage(value).validNel
@@ -33,21 +29,11 @@ object MessageValidator {
     }
   }
 
-  final case class TimeSpent(value: Int) {
-    override def toString: String = s"$value"
-  }
   private def validatedTime(value: Int): ValidationResult[TimeSpent] = {
     if(value > 0) {
       TimeSpent(value).valid
     } else {
       InvalidTimeError.invalidNel
-    }
-  }
-
-  final case class RelaxEvent(time: DateTime, before: Percentage, after: Percentage, minutesSpent: TimeSpent) {
-    override def toString: String = {
-      s"${time.toString("yyyy-MM-dd HH:mm")} with ${before} relaxation before " +
-        s"event and ${after} relaxation after the event. Time spent was ${minutesSpent}m."
     }
   }
 

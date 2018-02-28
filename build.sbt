@@ -20,4 +20,12 @@ libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.8.0"
 
 libraryDependencies += "com.enragedginger" %% "akka-quartz-scheduler" % "1.6.1-akka-2.5.x"
 
+libraryDependencies += "com.typesafe.slick" %% "slick" % "3.2.1"
+
+libraryDependencies += "com.typesafe.slick" %% "slick-hikaricp" % "3.2.1"
+
+libraryDependencies += "com.h2database" % "h2" % "1.4.187"
+
+libraryDependencies += "org.xerial" % "sqlite-jdbc" % "3.7.2"
+
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.4" % "test"

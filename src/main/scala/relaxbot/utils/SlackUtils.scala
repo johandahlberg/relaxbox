@@ -1,4 +1,4 @@
-package relaxbot
+package relaxbot.utils
 
 import slack.models.Im
 import slack.rtm.SlackRtmClient

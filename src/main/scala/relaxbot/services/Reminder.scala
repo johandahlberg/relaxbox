@@ -1,9 +1,9 @@
-package relaxbot
+package relaxbot.services
 
 import akka.actor.{Actor, ActorLogging, Props}
+import relaxbot.models.ReminderMessage
+import relaxbot.utils.SlackUtils
 import slack.rtm.SlackRtmClient
-
-final case class ReminderMessage(userName: String)
 
 class Reminder(slackClient: SlackRtmClient) extends Actor with ActorLogging {
   override def receive: Receive = {
@@ -14,6 +14,7 @@ class Reminder(slackClient: SlackRtmClient) extends Actor with ActorLogging {
       }
   }
 }
+
 object Reminder {
   def props(slackClient: SlackRtmClient): Props = {
     Props(new Reminder(slackClient))
